@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Hikidashi Importers｜購入履歴を CSV にするスクリプト</title>
+<meta name="description" content="DMM（FANZA）や DLsite の購入履歴を、Hikidashi に取り込める CSV にする、iPhone Safari 用の Userscripts。">
+<meta name="theme-color" content="#fff6ec">
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.hero2{background:radial-gradient(120% 90% at 85% 0%,var(--bg2) 0%,var(--bg) 60%);padding:8px 0 40px}
+.hero2 h1{font-size:clamp(26px,4.2vw,42px);margin:14px 0 12px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:800;text-decoration:none;padding:12px 22px;border-radius:999px;margin-top:10px}
+.btn.sub{background:var(--card);color:var(--accent);border:1px solid var(--line)}
+.scripts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card small{display:block;color:var(--mute);margin-top:10px;font-size:13px;word-break:break-all}
+.steps{list-style:none;padding:0;counter-reset:s;max-width:44em}
+.steps>li{position:relative;padding:2px 0 20px 48px;counter-increment:s}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--bg2);color:var(--accent);font-weight:800;display:grid;place-items:center;border:1px solid var(--line)}
+.steps b{display:block;margin-bottom:2px}
+.steps p,.steps li li{color:var(--sub);font-size:15px}
+.steps ul{margin:6px 0 0 1.2em}
+.note{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;color:var(--sub);font-size:15px;max-width:44em}
+@media (max-width:820px){.scripts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="hero2">
+  <div class="wrap" style="display:block">
+    <header class="top" style="padding-left:0;padding-right:0">
+      <a class="brand" href="./"><img src="assets/icon.png" alt="">Hikidashi Importers</a>
+    </header>
+    <span class="eyebrow">iPhone の Safari 用</span>
+    <h1>購入履歴を、CSV にして<br>Hikidashi に取り込む。</h1>
+    <p class="lead">自分のアカウントの購入履歴を、自分のブラウザの中だけで、CSV にするスクリプトです。サーバーには何も送りません。</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>スクリプト</h2>
+    <p class="section-lead">下のボタンを Safari で開くと、Userscripts が「インストール」を案内します（先に、下の準備を済ませてください）。</p>
+    <div class="scripts">
+      <div class="card">
+        <h3>DMM（FANZA）マイライブラリ</h3>
+        <p>購入済みの同人作品（ボイス・コミック・CG）を、タイトル・URL・クリエイター・画像つきで CSV にします。</p>
+        <a class="btn" href="scripts/dmm-export.user.js">インストール</a>
+        <small>対象ページ: www.dmm.co.jp/dc/-/mylibrary/　・v0.4.1</small>
+      </div>
+      <div class="card">
+        <h3>DLsite 購入履歴</h3>
+        <p>購入履歴の作品を、声優・サークル・カテゴリ・画像つきで CSV にします。負荷をかけないよう、間隔を空けて読み、続きから再開できます。</p>
+        <a class="btn" href="scripts/dlsite-export.user.js">インストール</a>
+        <small>対象ページ: www.dlsite.com/*/mypage/userbuy　・v0.1.1</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>使いかた</h2>
+    <ol class="steps">
+      <li><b>Userscripts アプリを入れて、保存フォルダを選ぶ</b>
+        <p>App Store で「<a href="https://apps.apple.com/app/userscripts/id1463298887">Userscripts</a>」（無料）を入れ、一度開いて、スクリプトの保存先フォルダを選びます（「ファイル」の「このiPhone内」に新しいフォルダを作ると簡単です）。</p></li>
+      <li><b>Safari で使えるようにする（ここでつまずきやすい）</b>
+        <ul>
+          <li>設定 → アプリ → Safari → 機能拡張 → Userscripts →「拡張機能を許可」をオン。</li>
+          <li>同じ画面で「他の Web サイト」を「許可」にする（対象サイトだけでもよい）。</li>
+          <li>プライベートブラウズではなく、通常のタブで開く。</li>
+        </ul></li>
+      <li><b>スクリプトを入れる</b>
+        <p>上のボタンを Safari で開いて、「インストール」をタップします。</p></li>
+      <li><b>サイトを開いて、書き出す</b>
+        <p>DMM のマイライブラリ、または DLsite の購入履歴を、ログインした状態で開きます。画面に出るボタンから CSV を作り、「共有」から保存します。</p></li>
+      <li><b>Hikidashi に取り込む</b>
+        <p>Hikidashi の「設定 → CSV をインポート」で、保存した CSV を選びます。同じ作品は URL で見分けるので、何度取り込んでも重複しません。</p></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>お約束と注意</h2>
+    <div class="note">
+      <p>非公式のツールです。DMM／FANZA・DLsite・Hikidashi の運営とは関係がありません。</p>
+      <p>自分のアカウントの、自分の購入履歴を、自分のブラウザの中だけで処理します。パスワードやトークンは扱わず、外部のサーバーにも送りません。取得の際は、1 件ずつ間隔を空け、拒否されたらその場で止まります。</p>
+      <p>各サイトの利用規約は、ご自身で確認してください。利用は自己責任でお願いします。</p>
+    </div>
+    <p style="margin-top:22px"><a class="btn sub" href="https://github.com/nemog9/hikidashi-importer-template">自分で作る人向けのテンプレート</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="https://apps.apple.com/jp/app/hikidashi-%E5%BC%95%E3%81%8D%E5%87%BA%E3%81%97/id6823911890">Hikidashi（App Store）</a>
+    </div>
+    <p>© nemog9</p>
+  </div>
+</footer>
+</body>
+</html>
